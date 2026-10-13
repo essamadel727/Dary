@@ -6,7 +6,7 @@
 <title>داري ثيرابيست | مركز تأهيل وتنمية الأطفال</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;700;800&family=Baloo+2:wght@500;700;800&family=Tajawal:wght@400;500;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --sky:#3FA9F5; --sun:#FFC52E; --coral:#FF6B5E; --mint:#3CCB9B; --grape:#8B6CF0;
@@ -17,6 +17,8 @@
   padding-top:env(safe-area-inset-top,0px);
   padding-bottom:env(safe-area-inset-bottom,0px);
 }
+html[lang="ar"]{--head:"Baloo Bhaijaan 2","Tajawal",sans-serif;--body:"Tajawal",system-ui,sans-serif}
+html[lang="en"]{--head:"Baloo 2","Nunito",system-ui,sans-serif;--body:"Nunito","Tajawal",system-ui,sans-serif}
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --ink:#EAF2FF; --ink-soft:#A9B9D3; --bg:#101B2E; --card:#192843; --line:#2B3F63;
@@ -29,8 +31,10 @@
 }
 html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 76px);scroll-behavior:smooth}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Tajawal",system-ui,sans-serif;font-size:18px;line-height:1.75;overflow-x:hidden}
-h1,h2,h3{font-family:"Baloo Bhaijaan 2","Tajawal",sans-serif;line-height:1.3;margin:0}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.7;overflow-x:hidden}
+html[lang="ar"] body{line-height:1.75}
+h1,h2,h3{font-family:var(--head);line-height:1.25;margin:0}
+html[lang="ar"] h1,html[lang="ar"] h2,html[lang="ar"] h3{line-height:1.3}
 p{margin:0}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--grape);outline-offset:3px;border-radius:10px}
@@ -38,16 +42,26 @@ a{color:inherit}
 
 /* header */
 header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);padding-top:env(safe-area-inset-top,0px)}
-.nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:12px}
-.logo{display:flex;align-items:center;gap:10px;font-family:"Baloo Bhaijaan 2",sans-serif;font-weight:800;font-size:24px;text-decoration:none}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:10px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--head);font-weight:800;font-size:24px;text-decoration:none;white-space:nowrap}
 .logo-dot{width:38px;height:38px;border-radius:14px 14px 14px 4px;background:var(--sun);display:grid;place-items:center;font-size:22px;transform:rotate(-6deg)}
-nav{display:flex;gap:6px;flex-wrap:wrap}
-nav a{text-decoration:none;font-weight:700;font-size:16px;padding:6px 14px;border-radius:99px}
-nav a:hover{background:var(--sky-tint)}
-@media(max-width:720px){nav{display:none}}
+.nav-tools{display:flex;align-items:center;gap:10px}
+
+.pill{border:0;cursor:pointer;font:700 17px var(--body);color:var(--ink);background:var(--card);padding:8px 18px;border-radius:99px;box-shadow:0 4px 0 var(--line);display:flex;align-items:center;gap:8px;white-space:nowrap}
+.pill:hover{transform:translateY(-2px)}
+.dd{position:relative}
+.dd-btn svg{transition:transform .2s}
+.dd-btn[aria-expanded="true"] svg{transform:rotate(180deg)}
+.dd-menu{position:absolute;top:calc(100% + 10px);inset-inline-start:0;min-width:210px;margin:0;padding:8px;list-style:none;background:var(--card);border-radius:22px;box-shadow:0 8px 0 var(--line),0 14px 30px rgba(29,47,78,.15);display:none}
+.dd-menu.open{display:block}
+.dd-menu a{display:flex;gap:10px;align-items:center;padding:10px 14px;border-radius:14px;text-decoration:none;font-weight:700}
+.dd-menu a:hover{background:var(--sky-tint)}
+#langBtn{font-family:"Nunito","Tajawal",sans-serif;background:var(--sun);color:#1D2F4E;box-shadow:0 4px 0 #d9a210}
+html[lang="en"] #langBtn{font-family:"Tajawal","Nunito",sans-serif}
+@media(max-width:560px){.logo{font-size:19px}.logo-dot{width:32px;height:32px;font-size:18px}.nav-tools>.btn{display:none}.pill{padding:8px 14px;font-size:16px}}
 
 /* buttons */
-.btn{display:inline-block;border:0;cursor:pointer;font:700 18px "Tajawal",sans-serif;text-decoration:none;padding:14px 28px;border-radius:99px;transition:transform .15s}
+.btn{display:inline-block;border:0;cursor:pointer;font:700 18px var(--body);text-decoration:none;padding:14px 28px;border-radius:99px;transition:transform .15s}
 .btn:hover{transform:translateY(-3px) rotate(-1deg)}
 .btn-main{background:var(--coral);color:#fff;box-shadow:0 5px 0 #c9473c}
 .btn-alt{background:var(--card);color:var(--ink);box-shadow:0 5px 0 var(--line)}
@@ -55,7 +69,7 @@ nav a:hover{background:var(--sky-tint)}
 /* hero */
 .hero{padding:34px 0 70px}
 .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}
-.hero h1{font-size:clamp(38px,6.4vw,66px);font-weight:800}
+.hero h1{font-size:clamp(38px,6.2vw,64px);font-weight:800}
 .hero h1 span{display:block}
 .hero p.lead{font-size:20px;color:var(--ink-soft);margin:18px 0 28px;max-width:34em}
 .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
@@ -82,7 +96,7 @@ section{padding:64px 0}
 
 /* activities */
 .tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-.tab{border:0;cursor:pointer;font:700 18px "Tajawal",sans-serif;color:var(--ink);background:var(--card);padding:10px 20px;border-radius:99px;box-shadow:0 4px 0 var(--line);transition:transform .15s}
+.tab{border:0;cursor:pointer;font:700 18px var(--body);color:var(--ink);background:var(--card);padding:10px 20px;border-radius:99px;box-shadow:0 4px 0 var(--line);transition:transform .15s}
 .tab:hover{transform:translateY(-2px)}
 .tab[aria-selected="true"]{background:var(--tc);color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.2);transform:translateY(2px)}
 .panel{background:var(--pt);border-radius:var(--radius);padding:30px;display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:center;transition:background .3s}
@@ -104,12 +118,12 @@ section{padding:64px 0}
 .card h3{font-size:23px;font-weight:700;margin:6px 0 4px}
 .card p{color:var(--ink-soft);font-size:17px}
 
-/* day timeline */
+/* day */
 .day{display:grid;gap:0;max-width:640px;position:relative}
 .step{display:grid;grid-template-columns:96px 1fr;gap:18px;padding-bottom:22px;position:relative}
 .step::before{content:"";position:absolute;inset-inline-start:47px;top:44px;bottom:-2px;width:4px;background:repeating-linear-gradient(var(--line) 0 8px,transparent 8px 14px)}
 .step:last-child::before{display:none}
-.time{width:96px;height:44px;border-radius:99px;background:var(--tc);color:#fff;font:700 16px "Tajawal",sans-serif;display:grid;place-items:center}
+.time{width:96px;height:44px;border-radius:99px;background:var(--tc);color:#fff;font:700 16px var(--body);display:grid;place-items:center}
 .step h3{font-size:22px}
 .step p{color:var(--ink-soft);font-size:17px}
 
@@ -135,14 +149,23 @@ footer{background:var(--ink);color:#EAF2FF;padding:34px 0 calc(34px + env(safe-a
 
 <header>
   <div class="wrap nav">
-    <a class="logo" href="#top"><span class="logo-dot">🌈</span>داري ثيرابيست</a>
-    <nav aria-label="القائمة الرئيسية">
-      <a href="#activities">الأنشطة</a>
-      <a href="#approach">طريقتنا</a>
-      <a href="#day">يوم في المركز</a>
-      <a href="#contact">تواصل معنا</a>
-    </nav>
-    <a class="btn btn-main" style="padding:8px 20px;font-size:16px;box-shadow:0 4px 0 #c9473c" href="#contact">احجز زيارة</a>
+    <a class="logo" href="#top"><span class="logo-dot">🧸</span><span data-i="brand"></span></a>
+    <div class="nav-tools">
+      <nav class="dd" data-al="navLabel">
+        <button class="pill dd-btn" id="ddBtn" aria-expanded="false" aria-controls="ddMenu" aria-haspopup="true">
+          <span data-i="menu"></span>
+          <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 4.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <ul class="dd-menu" id="ddMenu">
+          <li><a href="#activities" data-i="m_act"></a></li>
+          <li><a href="#approach" data-i="m_app"></a></li>
+          <li><a href="#day" data-i="m_day"></a></li>
+          <li><a href="#contact" data-i="m_con"></a></li>
+        </ul>
+      </nav>
+      <button class="pill" id="langBtn" type="button"><span aria-hidden="true">🌐</span><span id="langTxt"></span></button>
+      <a class="btn btn-main" style="padding:8px 20px;font-size:16px;box-shadow:0 4px 0 #c9473c" href="#contact" data-i="book"></a>
+    </div>
   </div>
 </header>
 
@@ -150,11 +173,11 @@ footer{background:var(--ink);color:#EAF2FF;padding:34px 0 calc(34px + env(safe-a
 <div class="hero">
   <div class="wrap hero-grid">
     <div>
-      <h1><span>مكان بيتعلم فيه</span><span>طفلك ويفرح</span><span>ويكبر بثقة</span></h1>
-      <p class="lead">مركز تأهيل وتنمية للأطفال في مصر، بيجمع بين رعاية الحضانة الدافئة والأنشطة الممتعة: رياضة ودبكة وفنون ورسم، وكل ده بإشراف متخصصين بيحبوا شغلهم.</p>
+      <h1 data-i="h1"></h1>
+      <p class="lead" data-i="lead"></p>
       <div class="hero-cta">
-        <a class="btn btn-main" href="#contact">احجز زيارة للمركز</a>
-        <a class="btn btn-alt" href="#activities">شوف الأنشطة</a>
+        <a class="btn btn-main" href="#contact" data-i="book2"></a>
+        <a class="btn btn-alt" href="#activities" data-i="see"></a>
       </div>
     </div>
     <div class="stage" aria-hidden="true">
@@ -171,10 +194,10 @@ footer{background:var(--ink);color:#EAF2FF;padding:34px 0 calc(34px + env(safe-a
 <section id="activities" class="band">
   <div class="wrap">
     <div class="sec-head">
-      <h2>أنشطة كل يوم فيها حاجة جديدة</h2>
-      <p>اختار نشاط وشوف إيه اللي طفلك بيتعلمه فيه.</p>
+      <h2 data-i="a_h"></h2>
+      <p data-i="a_p"></p>
     </div>
-    <div class="tabs" role="tablist" aria-label="الأنشطة"></div>
+    <div class="tabs" role="tablist" data-al="tabsLabel"></div>
     <div class="panel" id="panel" role="tabpanel" aria-live="polite"></div>
   </div>
 </section>
@@ -182,14 +205,14 @@ footer{background:var(--ink);color:#EAF2FF;padding:34px 0 calc(34px + env(safe-a
 <section id="approach" class="band" style="padding-top:0">
   <div class="wrap">
     <div class="sec-head">
-      <h2>إزاي بنتعامل مع كل طفل</h2>
-      <p>كل طفل ليه إيقاعه الخاص، واحنا بنمشي معاه مش بنسبقه.</p>
+      <h2 data-i="p_h"></h2>
+      <p data-i="p_p"></p>
     </div>
     <div class="cards">
-      <div class="card" style="background:var(--sky-tint)"><div class="em">🤝</div><h3>اهتمام فردي</h3><p>مجموعات صغيرة عشان كل طفل ياخد وقته ويتشاف.</p></div>
-      <div class="card" style="background:var(--sun-tint)"><div class="em">🧩</div><h3>تعلّم باللعب</h3><p>المهارات بتتبني من خلال الحركة والموسيقى والألوان، مش بالضغط.</p></div>
-      <div class="card" style="background:var(--mint-tint)"><div class="em">👩‍🏫</div><h3>فريق متخصص</h3><p>مشرفين وأخصائيين بيتابعوا تقدم الطفل خطوة بخطوة.</p></div>
-      <div class="card" style="background:var(--coral-tint)"><div class="em">💬</div><h3>أهله شركاء</h3><p>بنطمّن الأهل بتقارير بسيطة ونصايح يكملوها في البيت.</p></div>
+      <div class="card" style="background:var(--sky-tint)"><div class="em">🤝</div><h3 data-i="c1h"></h3><p data-i="c1p"></p></div>
+      <div class="card" style="background:var(--sun-tint)"><div class="em">🧩</div><h3 data-i="c2h"></h3><p data-i="c2p"></p></div>
+      <div class="card" style="background:var(--mint-tint)"><div class="em">👩‍🏫</div><h3 data-i="c3h"></h3><p data-i="c3p"></p></div>
+      <div class="card" style="background:var(--coral-tint)"><div class="em">💬</div><h3 data-i="c4h"></h3><p data-i="c4p"></p></div>
     </div>
   </div>
 </section>
@@ -197,14 +220,14 @@ footer{background:var(--ink);color:#EAF2FF;padding:34px 0 calc(34px + env(safe-a
 <section id="day" class="band" style="padding-top:0;padding-bottom:70px">
   <div class="wrap">
     <div class="sec-head">
-      <h2>يوم عادي في المركز</h2>
-      <p>مثال لشكل اليوم، والمواعيد الفعلية بتتحدد مع إدارة المركز.</p>
+      <h2 data-i="d_h"></h2>
+      <p data-i="d_p"></p>
     </div>
     <div class="day">
-      <div class="step" style="--tc:var(--sky)"><div class="time">الصباح</div><div><h3>استقبال وصباح الخير</h3><p>دايرة ترحيب وحكاية قصيرة عشان اليوم يبدأ بابتسامة.</p></div></div>
-      <div class="step" style="--tc:var(--mint)"><div class="time">بعدها</div><div><h3>رياضة وحركة</h3><p>ألعاب جماعية وتمارين بتقوّي الجسم والتوازن.</p></div></div>
-      <div class="step" style="--tc:var(--coral)"><div class="time">الظهر</div><div><h3>دبكة وموسيقى</h3><p>إيقاع وحركة مع صحابه في جو مليان ضحك.</p></div></div>
-      <div class="step" style="--tc:var(--grape)"><div class="time">العصر</div><div><h3>فنون ورسم</h3><p>ألوان وصلصال وورق، وكل طفل بيمشي ومعاه شغل إيده.</p></div></div>
+      <div class="step" style="--tc:var(--sky)"><div class="time" data-i="t1"></div><div><h3 data-i="s1h"></h3><p data-i="s1p"></p></div></div>
+      <div class="step" style="--tc:var(--mint)"><div class="time" data-i="t2"></div><div><h3 data-i="s2h"></h3><p data-i="s2p"></p></div></div>
+      <div class="step" style="--tc:var(--coral)"><div class="time" data-i="t3"></div><div><h3 data-i="s3h"></h3><p data-i="s3p"></p></div></div>
+      <div class="step" style="--tc:var(--grape)"><div class="time" data-i="t4"></div><div><h3 data-i="s4h"></h3><p data-i="s4p"></p></div></div>
     </div>
   </div>
 </section>
@@ -213,65 +236,150 @@ footer{background:var(--ink);color:#EAF2FF;padding:34px 0 calc(34px + env(safe-a
   <div class="wrap contact">
     <div>
       <div class="sec-head" style="margin-bottom:18px">
-        <h2>تعالوا نتعرف</h2>
-        <p>ابعتلنا بيانات بسيطة وهنرد عليك على واتساب نحدد زيارة للمركز.</p>
+        <h2 data-i="k_h"></h2>
+        <p data-i="k_p"></p>
       </div>
       <div class="info">
-        <div><span class="em">📍</span><p><b>العنوان</b>اكتب عنوان المركز هنا</p></div>
-        <div><span class="em">📞</span><p><b>الموبايل</b><span dir="ltr" id="phoneShow">+20 000 000 0000</span></p></div>
-        <div><span class="em">🕘</span><p><b>مواعيد العمل</b>اكتب مواعيد المركز هنا</p></div>
+        <div><span class="em">📍</span><p><b data-i="addr_l"></b><span data-i="addr_v"></span></p></div>
+        <div><span class="em">📞</span><p><b data-i="phone_l"></b><span dir="ltr">+20 000 000 0000</span></p></div>
+        <div><span class="em">🕘</span><p><b data-i="hours_l"></b><span data-i="hours_v"></span></p></div>
       </div>
     </div>
     <form id="f">
-      <label>اسم ولي الأمر<input name="parent" required autocomplete="name"></label>
-      <label>سن الطفل<input name="age" required inputmode="numeric" placeholder="مثلاً: 4 سنين"></label>
-      <label>عايز تعرف إيه؟<textarea name="msg" rows="3" placeholder="اسأل عن الأنشطة أو المواعيد أو الأسعار"></textarea></label>
-      <button class="btn btn-main" type="submit">ابعت على واتساب</button>
+      <label><span data-i="f_parent"></span><input name="parent" required autocomplete="name"></label>
+      <label><span data-i="f_age"></span><input name="age" required data-ph="f_age_ph"></label>
+      <label><span data-i="f_msg"></span><textarea name="msg" rows="3" data-ph="f_msg_ph"></textarea></label>
+      <button class="btn btn-main" type="submit" data-i="f_send"></button>
     </form>
   </div>
 </section>
 </main>
 
 <footer>
-  <div class="wrap">🌈 داري ثيرابيست — مركز تأهيل وتنمية الأطفال · darytherapist.com</div>
+  <div class="wrap" data-i="foot"></div>
 </footer>
 
 <script>
-// غيّر رقم الواتساب هنا (بصيغة دولية بدون + أو أصفار): مثال مصر 201001234567
+// Change the WhatsApp number here (international format, no + or leading zeros). Egypt example: 201001234567
 const WHATSAPP = "200000000000";
 
-const acts = [
-  {k:"رياضة", i:"⚽", c:"var(--mint)", t:"var(--mint-tint)", h:"رياضة وحركة",
-   d:"ألعاب وتمارين بسيطة بتخلي الطفل ينشط ويتحرك بثقة.",
-   l:["تقوية العضلات والتوازن","التعاون واللعب الجماعي","طاقة طفل بتتصرف صح"]},
-  {k:"دبكة", i:"💃", c:"var(--coral)", t:"var(--coral-tint)", h:"دبكة وإيقاع",
-   d:"خطوات الدبكة مع الموسيقى بتعلم الطفل التركيز والتناسق.",
-   l:["تنسيق الحركة مع الإيقاع","الانتماء للمجموعة","فرحة وثقة قدام الناس"]},
-  {k:"فنون", i:"🎨", c:"var(--grape)", t:"var(--grape-tint)", h:"أشغال وفنون",
-   d:"ورق وألوان وصلصال، ومن خلالها بتتدرب إيد الطفل وخياله.",
-   l:["تقوية عضلات الإيد الصغيرة","التعبير عن المشاعر","الإبداع وحل المشكلات"]},
-  {k:"رسم", i:"✏️", c:"var(--sky)", t:"var(--sky-tint)", h:"رسم وتلوين",
-   d:"رسم حر وتلوين موجّه بيساعد الطفل يركز ويحكي اللي جواه.",
-   l:["التركيز والصبر","مسكة القلم والكتابة بعدين","حكايات الطفل بالألوان"]}
+const T = {
+ar:{
+ title:"داري ثيرابيست | مركز تأهيل وتنمية الأطفال", brand:"داري ثيرابيست", menu:"الأقسام", navLabel:"القائمة الرئيسية", tabsLabel:"الأنشطة",
+ lang:"English",
+ m_act:"⚽ الأنشطة", m_app:"🤝 طريقتنا", m_day:"🕘 يوم في المركز", m_con:"📞 تواصل معنا",
+ book:"احجز زيارة", book2:"احجز زيارة للمركز", see:"شوف الأنشطة",
+ h1:"<span>مكان بيتعلم فيه</span><span>طفلك ويفرح</span><span>ويكبر بثقة</span>",
+ lead:"مركز تأهيل وتنمية للأطفال في مصر، بيجمع بين رعاية الحضانة الدافئة والأنشطة الممتعة: رياضة ودبكة وفنون ورسم، وكل ده بإشراف متخصصين بيحبوا شغلهم.",
+ a_h:"أنشطة كل يوم فيها حاجة جديدة", a_p:"اختار نشاط وشوف إيه اللي طفلك بيتعلمه فيه.",
+ p_h:"إزاي بنتعامل مع كل طفل", p_p:"كل طفل ليه إيقاعه الخاص، واحنا بنمشي معاه مش بنسبقه.",
+ c1h:"اهتمام فردي", c1p:"مجموعات صغيرة عشان كل طفل ياخد وقته ويتشاف.",
+ c2h:"تعلّم باللعب", c2p:"المهارات بتتبني من خلال الحركة والموسيقى والألوان، مش بالضغط.",
+ c3h:"فريق متخصص", c3p:"مشرفين وأخصائيين بيتابعوا تقدم الطفل خطوة بخطوة.",
+ c4h:"أهله شركاء", c4p:"بنطمّن الأهل بتقارير بسيطة ونصايح يكملوها في البيت.",
+ d_h:"يوم عادي في المركز", d_p:"مثال لشكل اليوم، والمواعيد الفعلية بتتحدد مع إدارة المركز.",
+ t1:"الصباح", s1h:"استقبال وصباح الخير", s1p:"دايرة ترحيب وحكاية قصيرة عشان اليوم يبدأ بابتسامة.",
+ t2:"بعدها", s2h:"رياضة وحركة", s2p:"ألعاب جماعية وتمارين بتقوّي الجسم والتوازن.",
+ t3:"الظهر", s3h:"دبكة وموسيقى", s3p:"إيقاع وحركة مع صحابه في جو مليان ضحك.",
+ t4:"العصر", s4h:"فنون ورسم", s4p:"ألوان وصلصال وورق، وكل طفل بيمشي ومعاه شغل إيده.",
+ k_h:"تعالوا نتعرف", k_p:"ابعتلنا بيانات بسيطة وهنرد عليك على واتساب نحدد زيارة للمركز.",
+ addr_l:"العنوان", addr_v:"اكتب عنوان المركز هنا", phone_l:"الموبايل", hours_l:"مواعيد العمل", hours_v:"اكتب مواعيد المركز هنا",
+ f_parent:"اسم ولي الأمر", f_age:"سن الطفل", f_age_ph:"مثلاً: 4 سنين", f_msg:"عايز تعرف إيه؟", f_msg_ph:"اسأل عن الأنشطة أو المواعيد أو الأسعار", f_send:"ابعت على واتساب",
+ foot:"داري ثيرابيست — مركز تأهيل وتنمية الأطفال · darytherapist.com",
+ wa:(p,a,m)=>"السلام عليكم، أنا "+p+"، وعندي طفل عمره "+a+". "+(m||"عايز أعرف أكتر عن المركز."),
+ acts:[
+  {k:"رياضة",h:"رياضة وحركة",d:"ألعاب وتمارين بسيطة بتخلي الطفل ينشط ويتحرك بثقة.",l:["تقوية العضلات والتوازن","التعاون واللعب الجماعي","طاقة طفل بتتصرف صح"]},
+  {k:"دبكة",h:"دبكة وإيقاع",d:"خطوات الدبكة مع الموسيقى بتعلم الطفل التركيز والتناسق.",l:["تنسيق الحركة مع الإيقاع","الانتماء للمجموعة","فرحة وثقة قدام الناس"]},
+  {k:"فنون",h:"أشغال وفنون",d:"ورق وألوان وصلصال، ومن خلالها بتتدرب إيد الطفل وخياله.",l:["تقوية عضلات الإيد الصغيرة","التعبير عن المشاعر","الإبداع وحل المشكلات"]},
+  {k:"رسم",h:"رسم وتلوين",d:"رسم حر وتلوين موجّه بيساعد الطفل يركز ويحكي اللي جواه.",l:["التركيز والصبر","مسكة القلم والكتابة بعدين","حكايات الطفل بالألوان"]}
+ ]
+},
+en:{
+ title:"Dary Therapist | Child Development & Rehabilitation Center", brand:"Dary Therapist", menu:"Sections", navLabel:"Main menu", tabsLabel:"Activities",
+ lang:"العربية",
+ m_act:"⚽ Activities", m_app:"🤝 Our approach", m_day:"🕘 A day at the center", m_con:"📞 Contact us",
+ book:"Book a visit", book2:"Book a visit", see:"See the activities",
+ h1:"<span>A place where your</span><span>child learns, plays</span><span>and grows with confidence</span>",
+ lead:"A child development and rehabilitation center in Egypt that blends the warmth of a nursery with fun activities: sports, dabke, arts and drawing, all guided by specialists who love what they do.",
+ a_h:"Every day brings something new", a_p:"Pick an activity to see what your child learns from it.",
+ p_h:"How we work with each child", p_p:"Every child has their own pace. We walk alongside them instead of rushing ahead.",
+ c1h:"Individual attention", c1p:"Small groups, so every child gets the time and the attention they deserve.",
+ c2h:"Learning through play", c2p:"Skills grow through movement, music and color, never through pressure.",
+ c3h:"A specialist team", c3p:"Instructors and specialists who follow each child's progress step by step.",
+ c4h:"Parents are partners", c4p:"Simple progress updates and tips you can continue at home.",
+ d_h:"A day at the center", d_p:"A sample of how a day can look. Actual timings are set by the center.",
+ t1:"Morning", s1h:"Welcome circle", s1p:"A warm greeting and a short story so the day starts with a smile.",
+ t2:"Then", s2h:"Sports and movement", s2p:"Group games and simple exercises that build strength and balance.",
+ t3:"Midday", s3h:"Dabke and music", s3p:"Rhythm and movement with friends, full of laughter.",
+ t4:"Afternoon", s4h:"Arts and drawing", s4p:"Colors, clay and paper, and every child goes home with something they made.",
+ k_h:"Let's get to know each other", k_p:"Send us a few details and we'll reply on WhatsApp to arrange a visit.",
+ addr_l:"Address", addr_v:"Add the center's address here", phone_l:"Phone", hours_l:"Opening hours", hours_v:"Add the center's hours here",
+ f_parent:"Parent's name", f_age:"Child's age", f_age_ph:"For example: 4 years", f_msg:"What would you like to know?", f_msg_ph:"Ask about activities, schedule or fees", f_send:"Send on WhatsApp",
+ foot:"Dary Therapist · Child development and rehabilitation center · darytherapist.com",
+ wa:(p,a,m)=>"Hello, my name is "+p+" and my child is "+a+". "+(m||"I'd like to know more about the center."),
+ acts:[
+  {k:"Sports",h:"Sports and movement",d:"Simple games and exercises that help children move with confidence.",l:["Stronger muscles and better balance","Teamwork and group play","A healthy outlet for energy"]},
+  {k:"Dabke",h:"Dabke and rhythm",d:"Dabke steps set to music teach focus and coordination.",l:["Moving in time with the rhythm","A sense of belonging to the group","Joy and confidence in front of others"]},
+  {k:"Arts",h:"Arts and crafts",d:"Paper, paint and clay train little hands and big imaginations.",l:["Stronger small hand muscles","A way to express feelings","Creativity and problem solving"]},
+  {k:"Drawing",h:"Drawing and coloring",d:"Free drawing and guided coloring help children focus and tell their stories.",l:["Focus and patience","A comfortable pencil grip for writing later","Stories told in color"]}
+ ]
+}};
+const STYLE = [
+  {i:"⚽",c:"var(--mint)",t:"var(--mint-tint)"},
+  {i:"💃",c:"var(--coral)",t:"var(--coral-tint)"},
+  {i:"🎨",c:"var(--grape)",t:"var(--grape-tint)"},
+  {i:"✏️",c:"var(--sky)",t:"var(--sky-tint)"}
 ];
+
+let lang = "ar", cur = 0;
+try{ const s = localStorage.getItem("dary-lang"); if(s==="ar"||s==="en") lang = s; }catch(e){}
+
 const tabs = document.querySelector(".tabs"), panel = document.getElementById("panel");
+
 function show(n){
-  const a = acts[n];
-  panel.style.setProperty("--tc", a.c); panel.style.setProperty("--pt", a.t);
-  panel.innerHTML = '<div class="panel-icon" aria-hidden="true">'+a.i+'</div><div><h3>'+a.h+'</h3><p>'+a.d+'</p><ul>'+a.l.map(x=>'<li>'+x+'</li>').join("")+'</ul></div>';
+  cur = n;
+  const a = T[lang].acts[n], s = STYLE[n];
+  panel.style.setProperty("--tc", s.c); panel.style.setProperty("--pt", s.t);
+  panel.innerHTML = '<div class="panel-icon" aria-hidden="true">'+s.i+'</div><div><h3>'+a.h+'</h3><p>'+a.d+'</p><ul>'+a.l.map(x=>'<li>'+x+'</li>').join("")+'</ul></div>';
   tabs.querySelectorAll(".tab").forEach((b,j)=>b.setAttribute("aria-selected", j===n));
 }
-acts.forEach((a,n)=>{
-  const b = document.createElement("button");
-  b.className="tab"; b.role="tab"; b.textContent=a.i+" "+a.k; b.style.setProperty("--tc", a.c);
-  b.onclick=()=>show(n); tabs.appendChild(b);
-});
-show(0);
+function buildTabs(){
+  tabs.innerHTML = "";
+  T[lang].acts.forEach((a,n)=>{
+    const b = document.createElement("button");
+    b.className="tab"; b.role="tab"; b.textContent=STYLE[n].i+" "+a.k; b.style.setProperty("--tc", STYLE[n].c);
+    b.onclick=()=>show(n); tabs.appendChild(b);
+  });
+}
 
+function setLang(l){
+  lang = l;
+  const d = T[l], root = document.documentElement;
+  root.lang = l; root.dir = l==="ar" ? "rtl" : "ltr";
+  document.title = d.title;
+  document.querySelectorAll("[data-i]").forEach(el=>{ el.innerHTML = d[el.dataset.i]; });
+  document.querySelectorAll("[data-ph]").forEach(el=>{ el.placeholder = d[el.dataset.ph]; });
+  document.querySelectorAll("[data-al]").forEach(el=>{ el.setAttribute("aria-label", d[el.dataset.al]); });
+  document.getElementById("langTxt").textContent = d.lang;
+  buildTabs(); show(cur);
+  try{ localStorage.setItem("dary-lang", l); }catch(e){}
+}
+document.getElementById("langBtn").addEventListener("click", ()=>setLang(lang==="ar" ? "en" : "ar"));
+setLang(lang);
+
+/* dropdown */
+const ddBtn = document.getElementById("ddBtn"), ddMenu = document.getElementById("ddMenu");
+function ddSet(open){ ddMenu.classList.toggle("open", open); ddBtn.setAttribute("aria-expanded", open); }
+ddBtn.addEventListener("click", e=>{ e.stopPropagation(); ddSet(!ddMenu.classList.contains("open")); });
+ddMenu.addEventListener("click", e=>{ if(e.target.closest("a")) ddSet(false); });
+document.addEventListener("click", e=>{ if(!e.target.closest(".dd")) ddSet(false); });
+document.addEventListener("keydown", e=>{ if(e.key==="Escape"){ ddSet(false); ddBtn.focus(); } });
+
+/* form */
 document.getElementById("f").addEventListener("submit", e=>{
   e.preventDefault();
-  const d = new FormData(e.target);
-  const text = "السلام عليكم، أنا "+d.get("parent")+"، وعندي طفل عمره "+d.get("age")+". "+(d.get("msg")||"عايز أعرف أكتر عن المركز.");
+  const f = new FormData(e.target);
+  const text = T[lang].wa(f.get("parent"), f.get("age"), f.get("msg"));
   window.open("https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(text), "_blank", "noopener");
 });
 </script>
